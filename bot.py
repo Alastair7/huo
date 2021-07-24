@@ -1,6 +1,7 @@
 import json
 import os
 from discord.ext import commands
+import discord
 
 # Getting config.json data
 with open('config.json') as input_file:
@@ -11,7 +12,10 @@ token = data["TOKEN"]
 prefix = data["PREFIX"]
 name = data["BOT_NAME"]
 
-client = commands.Bot(command_prefix=prefix)
+intents = discord.Intents.default()
+client = commands.Bot(command_prefix=prefix, intents = intents)
+intents.members = True
+
 
 # COGS
 initial_extensions = ['commands.example']
