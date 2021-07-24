@@ -1,5 +1,5 @@
 import json
-import discord
+import os
 from discord.ext import commands
 
 # Getting config.json data
@@ -18,8 +18,10 @@ initial_extensions = ['commands.example']
 
 # LOAD COGS
 if __name__ == '__main__':
-    for extension in initial_extensions:
-        client.load_extension(extension)
+    for filename in os.listdir(f"./commands"):
+        if filename.endswith(f".py"):
+            client.load_extension(f"commands.{filename[:-3]}")
+            print(f"Command {filename[:-3]} loaded")
 
 
 @client.event
