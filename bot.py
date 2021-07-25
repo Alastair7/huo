@@ -2,6 +2,7 @@ import json
 import os
 from discord.ext import commands
 import discord
+from discord.ext.commands.errors import ExtensionNotFound
 
 # Getting config.json data
 with open('config.json') as input_file:
@@ -19,14 +20,42 @@ client = commands.Bot(command_prefix=prefix, intents = intents)
 
 
 # COGS
-initial_extensions = ['commands.example']
+
+#LOAD SPECIFIC COG
+@client.command()
+async def load(ctx,extension):
+    client.load_extension(f'commands.{extension}')
+    try:
+        print(f'Command: {extension} --> LOADED')
+    except ExtensionNotFound:
+        print(f'Command: {extension} --> UNLOADED')
+
+#UNLOAD SPECIFIC COG
+@client.command()
+async def unload(ctx, extension):
+    client.unload_extension(f'commands.{extension}')
+    print(f'Command: {extension} --> UNLOADED')
+
+#RELOAD SPECIFIC COG
+@client.command()
+async def reload(ctx, extension):
+    client.reload_extension(f'commands.{extension}')
+    try:
+        print(f'Command: {extension} --> RELOADED')
+    except ExtensionNotFound:
+        print(f'Command: {extension} --> UNLOADED')
 
 # LOAD COGS
 if __name__ == '__main__':
     for filename in os.listdir(f"./commands"):
         if filename.endswith(f".py"):
             client.load_extension(f"commands.{filename[:-3]}")
-            print(f"Command {filename[:-3]} loaded")
+            try:
+                print(f"Command: {filename[:-3].capitalize()} --> LOADED")
+            except ExtensionNotFound:
+                print(f"Command: {filename[:-3].capitalize()} --> UNLOADED")
+                
+
 
 
 @client.event
