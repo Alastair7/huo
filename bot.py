@@ -13,8 +13,9 @@ prefix = data["PREFIX"]
 name = data["BOT_NAME"]
 
 intents = discord.Intents.default()
-client = commands.Bot(command_prefix=prefix, intents = intents)
 intents.members = True
+client = commands.Bot(command_prefix=prefix, intents = intents)
+
 
 
 # COGS
