@@ -1,6 +1,3 @@
-from asyncio.windows_events import NULL
-from discord import activity
-from discord.activity import CustomActivity
 from discord.ext import commands
 import discord
 
@@ -9,26 +6,30 @@ class User_info(commands.Cog):
         self.client = client
     
     @commands.command(name='uinfo')
-    async def getUserInfo(self, ctx, member: discord.Member):
-        authorMember = member
+    async def getUserInfo(self, ctx):
+        userMember = ctx.author
 
         #Get Author info
-        authorName = str(authorMember.name)
-        authorAvatar = authorMember.avatar_url
-        authorJoiningDate = authorMember.joined_at.strftime("%d/%m/%y")
-        authorRoles = []
-
-        for role in authorMember.roles:
+        userName = str(userMember.name)
+        userAvatar = userMember.avatar_url
+        userJoiningDate = userMember.joined_at.strftime("%d/%m/%y")
+        # Get Roles
+        userRoles = []
+        for role in userMember.roles:
             if role.name != "@everyone":
-                authorRoles.append(role.name)
+                userRoles.append(role.mention)
+                if 'None' in userRoles:
+                    userRoles.remove('None')
             else:
-                authorRoles.append('None')
+                userRoles.append('None')
         
-        roles =", ".join(authorRoles)
+        roles =", ".join(userRoles)
         #Create Embed
-        embed = discord.Embed(title= authorName, description=f"This legend is here since: **{authorJoiningDate}**")
-        embed.set_thumbnail(url= authorAvatar)
+        embed = discord.Embed(title= userName, description=f"This legend is here since: **{userJoiningDate}**")
+        embed.set_thumbnail(url= userAvatar)
         embed.add_field(name="Roles", value=roles, inline=True)
+
+        # Get System Channel
         systemChannel = ctx.guild.system_channel
 
         await systemChannel.send(embed = embed)
