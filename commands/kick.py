@@ -9,7 +9,7 @@ class Kick(commands.Cog):
     async def kickUser(self, ctx, user:discord.Member,*,reason = None):
 
         if reason is None:
-            await ctx.send(f"{user.mention} was kicked || Reason: None")
+            await ctx.send(f"{user.mention} was **kicked** || Reason: None")
             await user.kick()
         else:
             await ctx.send(f"{user.mention} was **kicked** || **Reason:** {reason}")
