@@ -1,6 +1,5 @@
 from discord.ext import commands
 import discord
-from discord.role import Role
 
 class Give_role(commands.Cog):
     def __init__(self, client):
@@ -23,10 +22,10 @@ class Give_role(commands.Cog):
         # get guild roles
         guildRoles = ctx.guild.roles
 
-        #Remove membe the role
+        # remove membe the role
         for role in guildRoles:
             roleToRemove = role
-
+            # find Role
             if(roleToRemove.name == memberRole.name):
                 await member.remove_roles(roleToRemove)
                 await ctx.send(f"{role.mention} role **removed** to {member.mention}")
