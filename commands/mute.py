@@ -6,14 +6,20 @@ class Mute(commands.Cog):
         self.client = client
     
     @commands.command(name='mute')
-    async def muteUser(self, ctx, user: discord.Member, *, reason: str):
-        await user.edit(Mute = True, reason= reason)
-        print(f'{user.name} muted')
+    async def muteUser(self, ctx, member: discord.Member,*, reason = None):
+        muteRole = discord.utils.get(member.guild.roles, id=869894243022438400) 
+        if reason is None:
+            print(f'{member.name} muted || **Reason:** {reason}')
+            await member.add_roles(muteRole) 
+        else:
+            await member.add_roles(muteRole)
+            print(f'{member.name} muted || **Reason:** {reason}')
     
     @commands.command(name='unmute')
-    async def unMuteUser(self, ctx, user: discord.Member):
-        await user.edit(Mute = False)
-        print(f'{user.name} unmuted')
+    async def unMuteUser(self, ctx, member: discord.Member):
+        muteRole = discord.utils.get(member.guild.roles, id=869894243022438400) 
+        await member.remove_roles(muteRole)
+        print(f'{member.name} unmuted')
 
 def setup(client):
     client.add_cog(Mute(client))
