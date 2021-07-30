@@ -29,6 +29,35 @@ class Give_role(commands.Cog):
             if(roleToRemove.name == memberRole.name):
                 await member.remove_roles(roleToRemove)
                 await ctx.send(f"{role.mention} role **removed** to {member.mention}")
+    
+    # ERROR HANDLING
+    @giveRoleToMember.error
+    async def giveRoleToMemberError(self, ctx, error):
+        if isinstance(error, commands.BadArgument):
+            await ctx.send(f"Bad arguments were introduced.")
+        elif isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send(f"Missing required args.")
+        elif isinstance(error, commands.CommandInvokeError):
+            await ctx.send(f"Hey, expected`-g_role @(Someone) @(Some role)`")
+        elif isinstance(error, commands.MemberNotFound) or isinstance(error, commands.RoleNotFound):
+            await ctx.send(f"Member or role doesn't exist.")
+        else:
+            await ctx.send(f"Oops! something went wrong")
+
+    @removeRoleToMember.error
+    async def removeRoleToMemberError(self, ctx, error):
+        if isinstance(error, commands.BadArgument):
+            await ctx.send(f"Bad arguments were introduced.")
+        elif isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send(f"Missing required args.")
+        elif isinstance(error, commands.CommandInvokeError):
+            await ctx.send(f"Hey, expected`-g_role @(Someone) @(Some role)`")
+        elif isinstance(error, commands.MemberNotFound) or isinstance(error, commands.RoleNotFound):
+            await ctx.send(f"Member or role doesn't exist.")
+        else:
+            await ctx.send(f"Oops! something went wrong")
+
+
 
 
 def setup(client):
