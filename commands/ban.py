@@ -26,24 +26,7 @@ class Ban(commands.Cog):
                 await ctx.send(f"{userBanned.mention} was **unbanned**")
             else:
                 await ctx.send("User not found")
-            
-    @banUser.error
-    async def banUserError(self, ctx, error):
-        if isinstance(error, commands.BadArgument):
-            await ctx.send("Bad arguments were introduced.")
-        elif isinstance(error, commands.MissingPermissions):
-            await ctx.send(f"You don't have permissions to use this command.")
-        elif isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send(f"Missing required arguments.")
-    
-    @unBanUser.error
-    async def unBanUserError(self, ctx, error):
-        if isinstance(error, commands.BadArgument):
-            await ctx.send("Bad arguments were introduced.")
-        elif isinstance(error, commands.MissingPermissions):
-            await ctx.send(f"You don't have permissions to use this command.")
-        elif isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send(f"Missing required arguments.")
+
             
 
 

@@ -22,27 +22,7 @@ class Mute(commands.Cog):
         await member.remove_roles(muteRole)
         print(f'{member.name} unmuted')
     
-    @muteUser.error
-    async def muteUserError(self, ctx, error):
-        if isinstance(error, commands.MissingPermissions):
-            await ctx.send("You don't have the permissions to use this command.")
-        elif isinstance(error, commands.BadArgument):
-            await ctx.send("Bad arguments were introduced.")
-        elif isinstance(error, commands.MemberNotFound):
-            await ctx.send("Member not found")
-        elif isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send("Missing required arguments.")
-    
-    @unMuteUser.error
-    async def unMuteUserError(self, ctx, error):
-        if isinstance(error, commands.MissingPermissions):
-            await ctx.send("You don't have the permissions to use this command.")
-        elif isinstance(error, commands.BadArgument):
-            await ctx.send("Bad arguments were introduced.")
-        elif isinstance(error, commands.MemberNotFound):
-            await ctx.send("Member not found")
-        elif isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send("Missing required arguments.")
+
 
 def setup(client):
     client.add_cog(Mute(client))

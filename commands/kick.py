@@ -16,15 +16,5 @@ class Kick(commands.Cog):
             await ctx.send(f"{member.mention} was **kicked** || **Reason:** {reason}")
             await member.kick(reason=reason)
 
-    @kickUser.error
-    async def kickUserError(self,ctx,error):
-        if isinstance(error,commands.BadArgument):
-            await ctx.send(f"Bad arguments were introduced.")
-        elif isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send(f"Missing required arguments.")
-        elif isinstance(error, MissingPermissions):
-            await ctx.send(f"Missing permissions.")
-        else:
-            await ctx.send(f"Oops! something went wrong.")
 def setup(client):
     client.add_cog(Kick(client))
