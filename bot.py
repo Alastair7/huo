@@ -4,6 +4,7 @@ from discord.ext import commands
 import discord
 from discord.ext.commands.errors import ExtensionNotFound
 
+
 # Getting config.json data
 with open('config.json') as input_file:
     data = json.load(input_file)

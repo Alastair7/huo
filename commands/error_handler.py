@@ -1,6 +1,5 @@
 from discord.ext import commands
-import discord
-from discord.ext.commands.errors import BadArgument
+import traceback
 
 class Error_handler(commands.Cog):
     def __init__(self, client):
@@ -24,7 +23,7 @@ class Error_handler(commands.Cog):
         elif isinstance(error, commands.CommandOnCooldown):
             await ctx.send(f"This command is on cooldown.")
         else:
-            await ctx.send(f"Unknown error appeared.")
+            traceback.print_exc()
     
 def setup(client):
     client.add_cog(Error_handler(client))
