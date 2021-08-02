@@ -14,7 +14,7 @@ token = data["TOKEN"]
 prefix = data["PREFIX"]
 name = data["BOT_NAME"]
 
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 intents.members = True
 client = commands.Bot(command_prefix=prefix, intents = intents)
 
