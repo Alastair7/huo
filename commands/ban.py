@@ -5,7 +5,7 @@ class Ban(commands.Cog):
     def __init__(self, client):
         self.client = client
     
-    @commands.command(name='ban')
+    @commands.command(name='ban',help = "Ban a member from the server. Reason is optional")
     async def banUser(self, ctx, user: discord.Member,*, reason = None):
         if reason is None:
             await ctx.send(f"{user.mention} was **banned** || Reason: None")
@@ -14,7 +14,7 @@ class Ban(commands.Cog):
             await ctx.send(f"{user.mention} was **banned** || Reason: {reason}")
             await user.ban(reason=reason)
     
-    @commands.command(name='unban')
+    @commands.command(name='unban', help="Unban a member from the server. Reason is optional")
     async def unBanUser(self, ctx, member:discord.User):
         # Get banned people from this guild
         usersBanned = await ctx.guild.bans()

@@ -5,7 +5,7 @@ class Give_role(commands.Cog):
     def __init__(self, client):
         self.client = client
     
-    @commands.command(name='g_role')
+    @commands.command(name='g_role', help="Give an existent role to a member.")
     async def giveRoleToMember(self, ctx, member: discord.Member, memberRole: discord.Role):
         # get guild roles
         guildRoles = ctx.guild.roles
@@ -17,7 +17,7 @@ class Give_role(commands.Cog):
                 await member.add_roles(roleToFind)
                 await ctx.send(f"{role.mention} role **added** to {member.mention}")
     
-    @commands.command(name='r_role')
+    @commands.command(name='r_role', help="Remove an existent role to a member.")
     async def removeRoleToMember(self, ctx, member: discord.Member, memberRole: discord.Role):
         # get guild roles
         guildRoles = ctx.guild.roles

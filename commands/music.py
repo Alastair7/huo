@@ -49,7 +49,7 @@ class Music(commands.Cog):
     def __init__(self, client):
         self.client = client
     
-    @commands.command(name='join')
+    @commands.command(name='join', help="Joins bot to a voice channel.")
     async def join(self, ctx):
         if ctx.author.voice is None:
             await ctx.send("You're not in a voice channel!")
@@ -61,7 +61,7 @@ class Music(commands.Cog):
         else:
             await ctx.voice_client.move_to(voiceChannel)
     
-    @commands.command(name='disconnect')
+    @commands.command(name='disconnect', help="Disconnect bot from a voice channel.")
     async def disconnect(self, ctx):
         vc = ctx.voice_client
         if vc.is_connected():
@@ -69,7 +69,7 @@ class Music(commands.Cog):
         else:
             await ctx.send("I am not connected in any voice channel!")
     
-    @commands.command(name='play')
+    @commands.command(name='play', help="Play a song by URL from Youtube.")
     async def play(self, ctx,*, url : str):
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=self.client.loop, stream=True)
@@ -77,7 +77,7 @@ class Music(commands.Cog):
             await ctx.send('Now playing {}'.format(player.title))
 
         
-    @commands.command(name='pause')
+    @commands.command(name='pause', help="Pause a song.")
     async def pause(self, ctx):
         vc = ctx.voice_client
         if vc.is_playing():
@@ -86,7 +86,7 @@ class Music(commands.Cog):
         else:
             await ctx.send("I am not playing anything!")
     
-    @commands.command(name='resume')
+    @commands.command(name='resume', help="Resume a song")
     async def resume(self, ctx):
         vc = ctx.voice_client
         if vc.is_paused():
@@ -94,7 +94,7 @@ class Music(commands.Cog):
         else:
             await ctx.send("There's no music!")
     
-    @commands.command(name='stop')
+    @commands.command(name='stop', help = "Stop a song.")
     async def stop(self, ctx):
         vc = ctx.voice_client
 

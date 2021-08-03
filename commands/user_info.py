@@ -5,7 +5,7 @@ class User_info(commands.Cog):
     def __init__(self,client):
         self.client = client
     
-    @commands.command(name='uinfo')
+    @commands.command(name='uinfo', help="Get your own info.")
     async def getUserInfo(self, ctx):
         userMember = ctx.author
 

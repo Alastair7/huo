@@ -6,7 +6,7 @@ class Kick(commands.Cog):
     def __init__(self, client):
         self.client = client
     
-    @commands.command(name='kick')
+    @commands.command(name='kick', help="Kick a member from the server")
     async def kickUser(self, ctx, member:discord.Member,*,reason = None):
 
         if reason is None:

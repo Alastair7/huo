@@ -5,7 +5,7 @@ class Bot_info(commands.Cog):
     def __init__(self, client):
         self.client = client
     
-    @commands.command(name='binfo')
+    @commands.command(name='binfo', help="Get bot info.")
     async def getBotInfo(self,ctx):
         date_format = "%d/%m/%Y"
         # get bot.user

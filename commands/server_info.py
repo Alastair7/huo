@@ -5,7 +5,7 @@ class Server_info(commands.Cog):
     def __init__(self, client):
         self.client = client
     
-    @commands.command(name='sinfo')
+    @commands.command(name='sinfo', help="Get the server info.")
     async def getServerInfo(self, ctx):
         date_format = "%d/%m/%Y"
 
