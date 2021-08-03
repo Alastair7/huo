@@ -14,7 +14,7 @@ class Welcome(commands.Cog):
         miembroRole = discord.utils.get(member.guild.roles, id=868768097383890984)
         
         # Creating Embed
-        embed = discord.Embed(title="Embed Added",description="Embed Description",color = 0xFF5733)
+        embed = discord.Embed(title="Member Joined",description="Message Description",color = 0xFF5733)
         embed.set_author(name=f"{member.name}", icon_url=f"{member.avatar_url}")
         embed.add_field(name="Field 1", value="This is field 1", inline = False)
         embed.add_field(name="Field 2", value="This is field 2", inline = True)
@@ -33,7 +33,7 @@ class Welcome(commands.Cog):
         systemChannel = discord.utils.get(member.guild.channels, id=835107161608552470)
 
         # Creating Embed
-        embed = discord.Embed(title="Embed Removed",description="Embed Description",color = 0xFF5733)
+        embed = discord.Embed(title="Member Left",description="Message Description",color = 0xFF5733)
         embed.set_author(name=f"{member.name}", icon_url=f"{member.avatar_url}")
         embed.add_field(name="Field 1", value="This is field 1", inline = False)
         embed.add_field(name="Field 2", value="This is field 2", inline = True)
