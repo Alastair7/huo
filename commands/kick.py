@@ -10,10 +10,12 @@ class Kick(commands.Cog):
     async def kickUser(self, ctx, member:discord.Member,*,reason = None):
 
         if reason is None:
-            await ctx.send(f"{member.mention} was **kicked** || Reason: None")
+            embed = discord.Embed(description=f"{member.mention} was **kicked** || **Reason:** None")
+            await ctx.send(embed = embed)
             await member.kick()
         else:
-            await ctx.send(f"{member.mention} was **kicked** || **Reason:** {reason}")
+            embed = discord.Embed(description=f"{member.mention} was **kicked** || **Reason:** {reason}")
+            await ctx.send(embed = embed)
             await member.kick(reason=reason)
 
 def setup(client):

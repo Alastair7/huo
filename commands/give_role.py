@@ -15,7 +15,8 @@ class Give_role(commands.Cog):
             roleToFind = role
             if roleToFind.name == memberRole.name:
                 await member.add_roles(roleToFind)
-                await ctx.send(f"{role.mention} role **added** to {member.mention}")
+                embed = discord.Embed(description=f"{role.mention} role **added** to {member.mention}")
+                await ctx.send(embed = embed)
     
     @commands.command(name='r_role', help="Remove an existent role to a member.")
     async def removeRoleToMember(self, ctx, member: discord.Member, memberRole: discord.Role):
@@ -28,7 +29,8 @@ class Give_role(commands.Cog):
             # find Role
             if(roleToRemove.name == memberRole.name):
                 await member.remove_roles(roleToRemove)
-                await ctx.send(f"{role.mention} role **removed** to {member.mention}")
+                embed = discord.Embed(description=f"{role.mention} role **removed** to {member.mention}")
+                await ctx.send(embed = embed)
     
 
 

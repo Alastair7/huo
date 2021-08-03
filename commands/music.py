@@ -52,7 +52,8 @@ class Music(commands.Cog):
     @commands.command(name='join', help="Joins bot to a voice channel.")
     async def join(self, ctx):
         if ctx.author.voice is None:
-            await ctx.send("You're not in a voice channel!")
+            embed = discord.Embed(description="You're not in a voice channel")
+            await ctx.send(embed = embed)
         
         voiceChannel = ctx.author.voice.channel
 
@@ -67,14 +68,16 @@ class Music(commands.Cog):
         if vc.is_connected():
             await ctx.voice_client.disconnect()
         else:
-            await ctx.send("I am not connected in any voice channel!")
+            embed = discord.Embed(description="I am not connected in any voice channel!")
+            await ctx.send(embed = embed)
     
     @commands.command(name='play', help="Play a song by URL from Youtube.")
     async def play(self, ctx,*, url : str):
         async with ctx.typing():
             player = await YTDLSource.from_url(url, loop=self.client.loop, stream=True)
             ctx.voice_client.play(player, after=lambda e: print('Player error: %s' % e) if e else None)
-            await ctx.send('Now playing {}'.format(player.title))
+            embed = discord.Embed(description=f":arrow_forward: Now playing {player.title}")
+            await ctx.send(embed = embed)
 
         
     @commands.command(name='pause', help="Pause a song.")
@@ -82,23 +85,29 @@ class Music(commands.Cog):
         vc = ctx.voice_client
         if vc.is_playing():
             await ctx.voice_client.pause()
-            await ctx.send("Paused")
+            embed = discord.Embed(description=f":pause_button: Song paused")
+            await ctx.send(embed = embed)
         else:
-            await ctx.send("I am not playing anything!")
+            embed = discord.Embed(description="I am not playing anything!")
+            await ctx.send(embed = embed)
     
     @commands.command(name='resume', help="Resume a song")
     async def resume(self, ctx):
         vc = ctx.voice_client
         if vc.is_paused():
+            embed = discord.Embed(description=f":arrow_forward: Song resumed!")
             await ctx.voice_client.resume()
+            await ctx.send(embed = embed)
         else:
-            await ctx.send("There's no music!")
+            embed = discord.Embed(description="There's no music!")
+            await ctx.send(embed = embed)
     
     @commands.command(name='stop', help = "Stop a song.")
     async def stop(self, ctx):
         vc = ctx.voice_client
-
+        embed = discord.Embed(description=f":stop_button: Song stopped!")
         vc.stop()
+        await ctx.send(embed = embed)
     
 
 def setup(client):

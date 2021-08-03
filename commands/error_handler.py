@@ -1,27 +1,34 @@
 from discord.ext import commands
 import traceback
+import discord
 
 class Error_handler(commands.Cog):
     def __init__(self, client):
         self.client = client
     
-
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.MissingPermissions):
-            await ctx.send(f"You don't have the permission to use this command.")
+            embed = discord.Embed(description="You don't have permissions to use this command.")
+            await ctx.send(embed = embed)
         elif isinstance(error, commands.BadArgument):
-            await ctx.send(f"Bad arguments were introduced.")
+            embed = discord.Embed(description="Bad arguments were introduced.")
+            await ctx.send(embed = embed)
         elif isinstance(error, commands.MemberNotFound ):
-            await ctx.send(f"Couldn't find member.")
+            embed = discord.Embed(description="Couldn't find member.")
+            await ctx.send(embed = embed)
         elif isinstance(error, commands.RoleNotFound):
-            await ctx.send(f"Couldn't find role.")
+            embed = discord.Embed(description="Couldn't find role.")
+            await ctx.send(embed = embed)
         elif isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send(f"Required arguments are missing.")
+            embed = discord.Embed(description="Required arguments are missing.")
+            await ctx.send(embed = embed)
         elif isinstance(error, commands.CommandNotFound):
-            await ctx.send(f"This command doesn't exists")
+            embed = discord.Embed(description="Command not found.")
+            await ctx.send(embed = embed)
         elif isinstance(error, commands.CommandOnCooldown):
-            await ctx.send(f"This command is on cooldown.")
+            embed = discord.Embed(description="This command is on cooldown")
+            await ctx.send(embed = embed)
         else:
             traceback.print_exc()
     

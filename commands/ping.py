@@ -1,4 +1,5 @@
 from discord.ext import commands
+import discord
 
 class Ping(commands.Cog):
     def __init__(self,client):
@@ -6,7 +7,8 @@ class Ping(commands.Cog):
 
     @commands.command(name='ping', help="Check latency.")
     async def ping(self, ctx):
-        await ctx.send(f'pong!\n{round(self.bot.latency * 1000)}ms')
+        embed = discord.Embed(description=f"pong!\n{round(self.bot.latency * 1000)}ms")
+        await ctx.send(embed = embed)
 
 
 def setup(client):

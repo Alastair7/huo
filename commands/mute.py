@@ -10,17 +10,20 @@ class Mute(commands.Cog):
     async def muteUser(self, ctx, member: discord.Member,*, reason = None):
         muteRole = discord.utils.get(member.guild.roles, id=869894243022438400) 
         if reason is None:
-            print(f'{member.name} muted || **Reason:** {reason}')
+            embed = discord.Embed(description=f'{member.name} was muted || **Reason:** {reason}')
+            await ctx.send(embed = embed)
             await member.add_roles(muteRole) 
         else:
+            embed = discord.Embed(description=f'{member.name} was muted || **Reason:** {reason}')
             await member.add_roles(muteRole)
-            print(f'{member.name} muted || **Reason:** {reason}')
+            await ctx.send(embed = embed)
     
     @commands.command(name='unmute', help="Unmute a member from the server.")
     async def unMuteUser(self, ctx, member: discord.Member):
+        embed = discord.Embed(description=f'{member.name} was unmuted')
         muteRole = discord.utils.get(member.guild.roles, id=869894243022438400) 
         await member.remove_roles(muteRole)
-        print(f'{member.name} unmuted')
+        await ctx.send(embed = embed)
     
 
 
